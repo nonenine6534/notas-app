@@ -1,99 +1,163 @@
-/* Estilos de los componentes de la App de Notas */
+/* Estilos de la App de Notas
+   Organización: cabecera, pestañas, editor, filtros,
+   rejilla de tarjetas, papelera y mensajes vacíos. */
 
-.app { width: 100%; max-width: 760px; }
+.app { width: 100%; max-width: 920px; margin: 0 auto; }
 
-.app h1 { text-align: center; margin-bottom: 20px; color: #8a6d00; }
+/* ---------- Cabecera y pestañas ---------- */
+.app-cabecera { text-align: center; margin-bottom: 20px; }
+.app-cabecera h1 { color: #8a6d00; margin-bottom: 4px; }
+.app-subtitulo { color: #9a8a4d; font-size: 14px; margin-bottom: 14px; }
 
-/* Formulario de crear/editar */
+.pestanas { display: inline-flex; gap: 6px; background: #fff; border: 1px solid #eadfae; border-radius: 999px; padding: 4px; }
+.pestana {
+  padding: 8px 18px; border: none; border-radius: 999px;
+  background: transparent; color: #8a6d00; font-size: 14px; cursor: pointer;
+}
+.pestana-activa { background: #b58900; color: #fff; font-weight: 600; }
+
+/* ---------- Editor / formulario ---------- */
 .form-nota {
   background: #fff;
   border: 1px solid #eadfae;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
 }
-
-.form-nota input,
+.form-titulo { font-size: 16px; color: #6b5500; }
+.form-nota input[type="text"],
 .form-nota textarea {
   padding: 10px 12px;
   border: 1px solid #ddd3a0;
   border-radius: 6px;
   font-size: 15px;
   font-family: inherit;
-}
-
-.form-botones { display: flex; gap: 8px; }
-
-#btn-guardar {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  background: #b58900;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-#btn-cancelar {
-  padding: 10px 18px;
-  border: 1px solid #b58900;
-  border-radius: 6px;
-  background: #fff;
-  color: #b58900;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-/* Buscador */
-#buscador {
   width: 100%;
-  margin: 18px 0;
-  padding: 10px 14px;
-  border: 1px solid #ddd3a0;
-  border-radius: 20px;
-  font-size: 15px;
+}
+.form-nota textarea { resize: vertical; }
+
+.contador { font-size: 12px; color: #9a8a4d; text-align: right; margin-top: -4px; }
+
+.chips-vista-previa { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.selector-color { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.selector-color-etiqueta { font-size: 14px; color: #6b5500; }
+.colores { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn-color {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid #ddd; cursor: pointer; font-size: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #6b5500;
+}
+.btn-color.seleccionado { border-color: #6b5500; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #b58900; }
+
+.check-fijar { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: #6b5500; cursor: pointer; margin-left: auto; }
+
+.form-botones { display: flex; gap: 8px; flex-wrap: wrap; }
+#btn-guardar {
+  padding: 10px 18px; border: none; border-radius: 6px;
+  background: #b58900; color: #fff; font-size: 15px; cursor: pointer;
+}
+#btn-guardar:hover { background: #9a7600; }
+#btn-cancelar {
+  padding: 10px 18px; border: 1px solid #b58900; border-radius: 6px;
+  background: #fff; color: #b58900; font-size: 15px; cursor: pointer;
 }
 
-/* Rejilla de notas */
+/* ---------- Barra de filtros ---------- */
+.barra-filtros { margin: 18px 0; display: flex; flex-direction: column; gap: 10px; }
+#buscador {
+  width: 100%; padding: 11px 16px;
+  border: 1px solid #ddd3a0; border-radius: 20px; font-size: 15px;
+  background: #fff;
+}
+.filtro-etiquetas { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.filtro-etiqueta-titulo { font-size: 13px; color: #9a8a4d; margin-right: 2px; }
+.btn-limpiar-filtro {
+  border: none; background: none; color: #c0392b;
+  font-size: 13px; cursor: pointer; text-decoration: underline;
+}
+
+/* ---------- Chips de etiquetas (compartido) ---------- */
+.chip {
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  background: #fff; border: 1px solid #d8c97a;
+  color: #6b5500; font-size: 12px; line-height: 1.4;
+}
+button.chip { cursor: pointer; font-family: inherit; }
+button.chip:hover { background: #fdf6e3; }
+.chip-activo { background: #b58900 !important; color: #fff !important; border-color: #b58900 !important; }
+
+/* ---------- Rejilla y tarjetas ---------- */
 .notas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 14px;
 }
-
 .nota {
-  background: #fffbe6;
-  border: 1px solid #eadfae;
-  border-radius: 8px;
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  border: 1px solid #eadfae; border-radius: 10px; padding: 14px;
+  display: flex; flex-direction: column; gap: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
 }
+.nota-fijada { border-width: 2px; box-shadow: 0 4px 14px rgba(181, 137, 0, .18); }
+.nota-en-papelera { opacity: .92; }
 
-.nota h3 { font-size: 16px; color: #6b5500; }
-.nota p { font-size: 14px; white-space: pre-wrap; flex: 1; }
+.nota-cabecera { display: flex; justify-content: space-between; align-items: center; min-height: 24px; }
+.distintivo-fijada {
+  font-size: 11px; font-weight: 700; letter-spacing: .02em;
+  background: #b58900; color: #fff; padding: 3px 8px; border-radius: 999px;
+}
+.btn-pin {
+  border: none; background: transparent; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 2px 4px; border-radius: 6px;
+}
+.btn-pin:hover { background: rgba(0, 0, 0, .06); }
 
-.nota .fecha { font-size: 12px; color: #9a8a4d; }
+.nota h3 { font-size: 16px; color: #6b5500; word-break: break-word; }
 
-.nota .acciones { display: flex; gap: 8px; }
+/* Extracto con corte visual extra además del corte en JS:
+   line-clamp limita a 5 líneas aunque cambie el ancho. */
+.nota-extracto {
+  font-size: 14px; white-space: pre-wrap; flex: 1; color: #333; word-break: break-word;
+  display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
+}
+.nota-sin-contenido { color: #9a8a4d; font-style: italic; }
 
+.nota-etiquetas { display: flex; flex-wrap: wrap; gap: 6px; }
+.nota-meta { display: flex; flex-direction: column; gap: 2px; border-top: 1px dashed rgba(0,0,0,.12); padding-top: 8px; }
+.nota .fecha, .nota .conteo { font-size: 12px; color: #7a6c33; }
+
+.nota .acciones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
 .nota .acciones button {
-  padding: 5px 12px;
-  border-radius: 14px;
-  border: 1px solid #b58900;
-  background: #fff;
-  color: #b58900;
-  cursor: pointer;
-  font-size: 13px;
+  padding: 5px 12px; border-radius: 14px; border: 1px solid #b58900;
+  background: #fff; color: #b58900; cursor: pointer; font-size: 13px;
 }
+.nota .acciones button:hover { background: #fdf6e3; }
+.nota .acciones .btn-borrar-nota { border-color: #c0392b; color: #c0392b; }
+.nota .acciones .btn-borrar-nota:hover { background: #fdecea; }
 
-.nota .acciones .btn-borrar-nota {
-  border-color: #c0392b;
-  color: #c0392b;
+/* ---------- Papelera ---------- */
+.papelera-cabecera {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 14px;
+  background: #fff; border: 1px solid #eadfae; border-radius: 10px; padding: 12px 14px;
 }
+.papelera-aviso { font-size: 14px; color: #6b5500; }
+.btn-vaciar {
+  padding: 8px 14px; border-radius: 6px; border: 1px solid #c0392b;
+  background: #fff; color: #c0392b; cursor: pointer; font-size: 14px;
+}
+.btn-vaciar:hover { background: #fdecea; }
 
-.sin-notas { text-align: center; color: #9a8a4d; padding: 12px 0; }
+.sin-notas { text-align: center; color: #9a8a4d; padding: 20px 12px; line-height: 1.5; }
+
+/* ---------- Responsive pequeño ---------- */
+@media (max-width: 560px) {
+  .notas { grid-template-columns: 1fr; }
+  .check-fijar { margin-left: 0; }
+  .pestanas { width: 100%; }
+  .pestana { flex: 1; }
+}
